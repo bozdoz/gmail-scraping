@@ -17,7 +17,11 @@ const getEmails = async (q) => {
 
   const json = await response.json()
 
-  const { threads = [] } = json
+  const { error, threads = [] } = json
+
+  if (error) {
+    throw new Error(error.message)
+  }
 
   return threads.map((email) => email.snippet)
 }
@@ -55,15 +59,14 @@ const getDataForMonth = async (month) => {
   const output = []
 
   /** @type string[] */
-  const names = NAMES.split(',')
+  const names = NAMES.split(/,\s?/)
 
   for (const name of names) {
     const snippets = emails.filter((email) =>
       name
+        .toLowerCase()
         .split(' ')
-        .some((namePart) =>
-          email.toLowerCase().includes(namePart.toLowerCase())
-        )
+        .every((namePart) => email.toLowerCase().includes(namePart))
     )
 
     for (const snippet of snippets) {
