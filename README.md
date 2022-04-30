@@ -9,7 +9,7 @@
 
 ### What is this?
 
-An example of the Gmail API.  
+An example of the Gmail API.
 
 Use-case is to get emails from e-transfers to tally up how much money people have sent you over the past year.
 
@@ -24,4 +24,4 @@ Use-case is to get emails from e-transfers to tally up how much money people hav
 
 ### Get API_TOKEN
 
-Run `npx serve` and navigate to http://localhost:5000.  Enter your credentials, click start, and follow the process.  Then check the network tab for something from content-gmail.googleapis.com/gmail/v1/users/me/labels.  It should have a header for Authorization with your API_TOKEN.
+Run `npx serve` and navigate to http://localhost:5000. Enter your credentials (client id and maybe client secret), click start, and follow the process. Then check the network tab for something from content-gmail.googleapis.com/gmail/v1/users/me/labels. It should have a header for Authorization with your API_TOKEN.

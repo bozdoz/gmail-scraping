@@ -1,7 +1,6 @@
 const fetch = require('node-fetch')
 
-const { API_TOKEN, NAMES = '' } = process.env
-const year = 2020
+const { API_TOKEN, NAMES = '', YEAR = 2021 } = process.env
 
 /** Uses Gmail API to get threads, and return just the snippets */
 const getEmails = async (q) => {
@@ -38,9 +37,9 @@ const formatDateYearLast = (date) => {
 
 /** passes the "after:" and "before:" queries to the gmail API method */
 const getEmailsForMonth = (month) => {
-  const beforeDate = new Date(year, month - 1, 15)
+  const beforeDate = new Date(YEAR, month - 1, 15)
   const afterDate = new Date(
-    month === 1 ? year - 1 : year,
+    month === 1 ? YEAR - 1 : YEAR,
     month === 1 ? 11 : month - 2,
     15
   )
@@ -53,7 +52,7 @@ const getEmailsForMonth = (month) => {
 
 /** returns csv-formatted data for a given month: name,date,dollar-amount */
 const getDataForMonth = async (month) => {
-  const date = formatDateYearLast(new Date(year, month - 1, 1))
+  const date = formatDateYearLast(new Date(YEAR, month - 1, 1))
   /** @type string[] */
   const emails = await getEmailsForMonth(month)
   const output = []
